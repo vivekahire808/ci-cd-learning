@@ -1,6 +1,11 @@
+require("dotenv").config();
+
 const express = require("express");
 
 const app = express();
+
+const PORT = process.env.PORT || 5000;
+const APP_ENV = process.env.APP_ENV || "development";
 
 app.get("/", (req, res) => {
   res.json({
@@ -10,11 +15,10 @@ app.get("/", (req, res) => {
 
 app.get("/health", (req, res) => {
   res.json({
-    status: "OK",
+    status: "ok",
+    environment: APP_ENV,
   });
 });
-
-const PORT = process.env.PORT || 5000;
 
 if (require.main === module) {
   app.listen(PORT, () => {
