@@ -46,3 +46,7 @@ jobs:
           tags: |
             ${{ vars.DOCKERHUB_USERNAME }}/cicd-learning:latest
             ${{ vars.DOCKERHUB_USERNAME }}/cicd-learning:${{ github.sha }}
+      - name: Trigger Render deployment
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: curl --fail --silent --show-error "$RENDER_DEPLOY_HOOK_URL"
